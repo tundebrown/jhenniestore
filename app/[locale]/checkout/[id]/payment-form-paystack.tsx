@@ -9,7 +9,6 @@ import { Card, CardContent } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
 import {
   approvePayPalOrder,
-  approvePaystackOrder,
   createPayPalOrder,
 } from '@/lib/actions/order.actions'
 import { IOrder } from '@/lib/db/models/order.model'
@@ -22,7 +21,7 @@ import ProductPrice from '@/components/shared/product/product-price'
 import StripeForm from './stripe-form'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import { PaystackButton } from 'react-paystack';
+// import { PaystackButton } from 'react-paystack';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -54,50 +53,6 @@ export default function OrderDetailsForm({
   if (isPaid) {
     redirect(`/account/orders/${order._id}`)
   }
-
-  //PayStackconfig
-  const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "";
-
-  const paystackConfig = {
-    email: "tundebrown101@gmail.com",
-    amount: Math.round(order.totalPrice * 100),
-    publicKey,
-    currency: 'NGN',
-    metadata: {
-       custom_fields: [
-             {
-                  display_name: 'Order Id',
-                  variable_name: 'order_id',
-                  value: order._id
-             },
-             {
-                  display_name: 'Amount',
-                  variable_name: 'amount',
-                  value: Math.round(order.totalPrice * 100)
-             },
-             {
-              display_name: 'Amount',
-              variable_name: 'amount',
-              value: Math.round(order.totalPrice * 100)
-         }
-        ]
-
-    },
-    onSuccess: (reference: any) => {
-      console.log(reference)
-      handleProcessPaystackOrder(reference, Math.round(order.totalPrice * 100))
-        // toast({description:'Payment successful', variant:"default"});
-    },
-    onClose: () => {
-        toast({description: "Payment Cancelled", variant:"destructive"});
-    },
-    onError: () => {
-      toast({description: "Payment Failed", variant:"destructive"});
-    }
-
-};
-
-
   function PrintLoadingState() {
     const [{ isPending, isRejected }] = usePayPalScriptReducer()
     let status = ''
@@ -119,14 +74,6 @@ export default function OrderDetailsForm({
   }
   const handleApprovePayPalOrder = async (data: { orderID: string }) => {
     const res = await approvePayPalOrder(order._id, data)
-    toast({
-      description: res.message,
-      variant: res.success ? 'default' : 'destructive',
-    })
-  }
-
-  const handleProcessPaystackOrder = async (data: { transaction: string, status: string }, amount: number) => {
-    const res = await approvePaystackOrder(order._id, data, amount)
     toast({
       description: res.message,
       variant: res.success ? 'default' : 'destructive',
@@ -199,14 +146,6 @@ export default function OrderDetailsForm({
                   orderId={order._id}
                 />
               </Elements>
-            )}
-
-            {!isPaid && paymentMethod === 'Paystack' && (
-              <PaystackButton
-              {...paystackConfig}
-              text='Pay With Paystack'
-              className='bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-200' 
-              />
             )}
 
             {!isPaid && paymentMethod === 'Cash On Delivery' && (

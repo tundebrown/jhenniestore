@@ -13,18 +13,18 @@ import { usePathname, useRouter } from '@/i18n/routing'
 import { i18n } from '@/i18n-config'
 
 export default function Footer() {
-  const router = useRouter()
-  const pathname = usePathname()
+  // const router = useRouter()
+  // const pathname = usePathname()
   const {
     setting: { site, availableCurrencies, currency },
     setCurrency,
   } = useSettingStore()
-  const { locales } = i18n
+  // const { locales } = i18n
 
-  const locale = useLocale()
+  // const locale = useLocale()
   const t = useTranslations()
   return (
-    <footer className='bg-black  text-white underline-link'>
+    <footer className='bg-black  text-white underline-link w-[100%] lg:w-[80%]'>
       <div className='w-full'>
         <Button
           variant='ghost'
@@ -92,9 +92,9 @@ export default function Footer() {
         </div>
         <div className='border-t border-gray-800'>
           <div className='max-w-7xl mx-auto py-8 px-4 flex flex-col items-center space-y-4'>
-            <div className='flex items-center space-x-4 flex-wrap md:flex-nowrap'>
+            <div className='flex items-center justify-center space-x-4 flex-wrap md:flex-nowrap gap-2'>
               <Image
-                src='/icons/logo.svg'
+                src='/icons/jhennie_logo.png'
                 alt={`${site.name} logo`}
                 width={48}
                 height={48}
@@ -104,7 +104,7 @@ export default function Footer() {
                   height: 'auto',
                 }}
               />{' '}
-              <Select
+              {/* <Select
                 value={locale}
                 onValueChange={(value) => {
                   router.push(pathname, { locale: value })
@@ -126,7 +126,7 @@ export default function Footer() {
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+              </Select> */}
               <Select
                 value={currency}
                 onValueChange={(value) => {

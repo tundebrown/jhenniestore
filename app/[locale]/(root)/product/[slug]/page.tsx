@@ -84,7 +84,7 @@ export default async function ProductDetails(props: {
                   <ProductPrice
                     price={product.price}
                     listPrice={product.listPrice}
-                    isDeal={product.tags.includes('todays-deal')}
+                    isDeal={product.tags === 'todays-deal'}
                     forListing={false}
                   />
                 </div>
@@ -94,7 +94,7 @@ export default async function ProductDetails(props: {
               <SelectVariant
                 product={product}
                 size={size || product.sizes[0]}
-                color={color || product.colors[0]}
+                color={color || product?.colors[0]?.name}
               />
             </div>
             <Separator className='my-2' />
@@ -112,22 +112,24 @@ export default async function ProductDetails(props: {
               <CardContent className='p-4 flex flex-col  gap-4'>
                 <ProductPrice price={product.price} />
 
-                {product.countInStock > 0 && product.countInStock <= 3 && (
-                  <div className='text-destructive font-bold'>
-                    {t('Product.Only X left in stock - order soon', {
-                      count: product.countInStock,
-                    })}
-                  </div>
-                )}
-                {product.countInStock !== 0 ? (
-                  <div className='text-green-700 text-xl'>
-                    {t('Product.In Stock')}
-                  </div>
-                ) : (
-                  <div className='text-destructive text-xl'>
-                    {t('Product.Out of Stock')}
-                  </div>
-                )}
+                {
+                  product.countInStock > 0 && product.countInStock <= 3 && (
+                    <div className='text-destructive font-bold'>
+                      Only {product.countInStock} left in stock - order soon
+                    </div>
+                  )
+                }
+                {
+                  product.countInStock !== 0 ? (
+                    <div className='text-green-700 text-xl'>
+                      In Stock
+                    </div>
+                  ) : (
+                    <div className='text-destructive text-xl'>
+                      Out of Stock
+                    </div>
+                  )
+                }
 
                 {product.countInStock !== 0 && (
                   <div className='flex justify-center items-center'>
@@ -143,7 +145,7 @@ export default async function ProductDetails(props: {
                         quantity: 1,
                         image: product.images[0],
                         size: size || product.sizes[0],
-                        color: color || product.colors[0],
+                        color: color || product?.colors[0]?.name,
                       }}
                     />
                   </div>

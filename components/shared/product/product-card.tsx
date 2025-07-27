@@ -47,7 +47,7 @@ const ProductCard = ({
   )
   const ProductDetails = () => (
     <div className='flex-1 space-y-2'>
-      <p className='font-bold'>{product.brand}</p>
+      {/* <p className='font-bold'>{product.brand}</p> */}
       <Link
         href={`/product/${product.slug}`}
         className='overflow-hidden text-ellipsis'
@@ -65,7 +65,7 @@ const ProductCard = ({
       </div>
 
       <ProductPrice
-        isDeal={product.tags.includes('todays-deal')}
+        isDeal={product.tags === 'todays-deal'}
         price={product.price}
         listPrice={product.listPrice}
         forListing
@@ -80,7 +80,7 @@ const ProductCard = ({
           clientId: generateId(),
           product: product._id,
           size: product.sizes[0],
-          color: product.colors[0],
+          color: product.colors[0].name,
           countInStock: product.countInStock,
           name: product.name,
           slug: product.slug,

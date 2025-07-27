@@ -29,6 +29,8 @@ export default async function HomePage() {
   const bestSellers = await getProductsForCard({
     tag: 'best-seller',
   })
+
+  console.log(newArrivals)
   const cards = [
     {
       title: t('Categories to explore'),
@@ -70,7 +72,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HomeCarousel items={carousels} />
+      <HomeCarousel items={carousels} categories={categories}/>
       <div className='md:p-4 md:space-y-4 bg-border'>
         <HomeCard cards={cards} />
         <Card className='w-full rounded-none'>

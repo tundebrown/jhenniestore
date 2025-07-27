@@ -26,16 +26,16 @@ const sortOrders = [
 
 const prices = [
   {
-    name: '$1 to $20',
-    value: '1-20',
+    name: '₦2000 to ₦5000',
+    value: '2000-5000',
   },
   {
-    name: '$21 to $50',
-    value: '21-50',
+    name: '₦5100 to ₦15000',
+    value: '5100-15000',
   },
   {
-    name: '$51 to $1000',
-    value: '51-1000',
+    name: '₦15100 to ₦100000',
+    value: '15100-100000',
   },
 ]
 

@@ -25,49 +25,57 @@ import { ProductInputSchema, ProductUpdateSchema } from '@/lib/validator'
 import { Checkbox } from '@/components/ui/checkbox'
 import { toSlug } from '@/lib/utils'
 import { IProductInput } from '@/types'
+// import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select'
+
+// Define the type for colors
+// type ColorType = {
+//   name: string;
+//   hex: string;
+// };
 
 const productDefaultValues: IProductInput =
   process.env.NODE_ENV === 'development'
     ? {
-        name: 'Sample Product',
-        slug: 'sample-product',
-        category: 'Sample Category',
-        images: ['/images/p11-1.jpg'],
-        brand: 'Sample Brand',
-        description: 'This is a sample description of the product.',
-        price: 99.99,
-        listPrice: 0,
-        countInStock: 15,
-        numReviews: 0,
-        avgRating: 0,
-        numSales: 0,
-        isPublished: false,
-        tags: [],
-        sizes: [],
-        colors: [],
-        ratingDistribution: [],
-        reviews: [],
-      }
+      name: 'Sample Product',
+      slug: 'sample-product',
+      category: 'Sample Category',
+      // images: ['/images/p11-1.jpg'],
+      images: [],
+      brand: 'Sample Brand',
+      description: 'This is a sample description of the product.',
+      price: 99.99,
+      listPrice: 0,
+      countInStock: 15,
+      numReviews: 0,
+      avgRating: 0,
+      numSales: 0,
+      isPublished: false,
+      tags: '',
+      sizes: [],
+      colors: [],
+      ratingDistribution: [],
+      reviews: [],
+    }
     : {
-        name: '',
-        slug: '',
-        category: '',
-        images: [],
-        brand: '',
-        description: '',
-        price: 0,
-        listPrice: 0,
-        countInStock: 0,
-        numReviews: 0,
-        avgRating: 0,
-        numSales: 0,
-        isPublished: false,
-        tags: [],
-        sizes: [],
-        colors: [],
-        ratingDistribution: [],
-        reviews: [],
-      }
+      name: '',
+      slug: '',
+      category: '',
+      images: [],
+      brand: '',
+      description: '',
+      price: 0,
+      listPrice: 0,
+      countInStock: 0,
+      numReviews: 0,
+      avgRating: 0,
+      numSales: 0,
+      isPublished: false,
+      tags: '',
+      sizes: [],
+      colors: [],
+      ratingDistribution: [],
+      reviews: [],
+    }
 
 const ProductForm = ({
   type,
@@ -122,6 +130,9 @@ const ProductForm = ({
     }
   }
   const images = form.watch('images')
+
+  // Define allowed tags
+// const allowedTags = ['todays-deal', 'new-arrival', 'best-seller', 'featured'];
 
   return (
     <Form {...form}>
@@ -253,6 +264,94 @@ const ProductForm = ({
           />
         </div>
 
+        <div className='flex flex-col gap-5 md:flex-row'>
+  {/* Tags Input */}
+  <FormField
+  control={form.control}
+  name='tags'
+  render={({ field }) => (
+    <FormItem className='w-full'>
+      <FormLabel>Tags (e.g., `'`new-arrival`'``, `'`todays-deal`'``, `'`best-seller`'``, `'`featured`'`)</FormLabel>
+      <FormControl>
+        <Input
+          placeholder="Enter a tag (e.g., 'new-arrival', 'todays-deal', 'best-seller', 'featured')"
+          value={field.value || ''}
+          onChange={(e) => {
+            const tag = e.target.value.trim();
+            field.onChange(tag); // Update the form state with the single tag
+          }}
+        />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
+  {/* Colors Input */}
+  <FormField
+    control={form.control}
+    name='colors'
+    render={({ field }) => (
+      <FormItem className='w-full'>
+        <FormLabel>Colors</FormLabel>
+        <FormControl>
+          <div className='flex flex-wrap gap-2'>
+            {(field.value || []).map((color, index) => (
+              <div
+                key={index}
+                className='flex items-center gap-2 p-2 border rounded'
+                style={{ backgroundColor: color.hex }}
+              >
+                <span>{color.name}</span>
+                <button
+                  type='button'
+                  onClick={() => {
+                    const updatedColors = field.value.filter((_, i) => i !== index);
+                    field.onChange(updatedColors);
+                  }}
+                  className='text-red-500'
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+            <Input
+              type='color'
+              onChange={(e) => {
+                const newColor = { name: e.target.value, hex: e.target.value };
+                field.onChange([...(field.value || []), newColor]);
+              }}
+              className='w-10 h-10 p-1'
+            />
+          </div>
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+
+  {/* Sizes Input */}
+  <FormField
+    control={form.control}
+    name='sizes'
+    render={({ field }) => (
+      <FormItem className='w-full'>
+        <FormLabel>Sizes</FormLabel>
+        <FormControl>
+          <Input
+            placeholder='Enter sizes (e.g., 10ml, 20ml)'
+            value={(field.value || []).join(', ')}
+            onChange={(e) => {
+              const sizes = e.target.value.split(',').map((size) => size.trim());
+              field.onChange(sizes);
+            }}
+          />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+</div>
         <div className='flex flex-col gap-5 md:flex-row'>
           <FormField
             control={form.control}

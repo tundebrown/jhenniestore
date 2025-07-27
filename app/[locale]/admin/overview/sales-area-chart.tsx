@@ -56,6 +56,7 @@ const STROKE_COLORS: { [key: string]: { [key: string]: string } } = {
   Red: { light: '#980404', dark: '#ff3333' },
   Green: { light: '#015001', dark: '#06dc06' },
   Gold: { light: '#ac9103', dark: '#f1d541' },
+  Blue: { light: '#5565dd', dark: '#36429b' },
 }
 
 export default function SalesAreaChart({ data }: { data: any[] }) {
@@ -67,7 +68,7 @@ export default function SalesAreaChart({ data }: { data: any[] }) {
       <AreaChart data={data}>
         <CartesianGrid horizontal={true} vertical={false} stroke='' />
         <XAxis dataKey='date' tick={<CustomXAxisTick />} interval={3} />
-        <YAxis fontSize={12} tickFormatter={(value: number) => `$${value}`} />
+        <YAxis fontSize={12} tickFormatter={(value: number) => `₦${value}`} />
         <Tooltip content={<CustomTooltip />} />
         <Area
           type='monotone'
