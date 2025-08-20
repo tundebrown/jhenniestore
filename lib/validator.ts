@@ -279,7 +279,7 @@ export const SettingInputSchema = z.object({
     defaultTheme: z
       .string()
       .min(1, "Default theme is required")
-      .default("light"),
+      .default("dark"),
     defaultColor: z
       .string()
       .min(1, "Default color is required")

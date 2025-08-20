@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 // import Image from 'next/image'
-import Autoplay from 'embla-carousel-autoplay'
+// import Autoplay from 'embla-carousel-autoplay'
 // import {
 //   Carousel,
 //   CarouselContent,

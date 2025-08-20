@@ -80,7 +80,7 @@ const ProductCard = ({
           clientId: generateId(),
           product: product._id,
           size: product.sizes[0],
-          color: product.colors[0].name,
+          // color: product.colors[0].name,
           countInStock: product.countInStock,
           name: product.name,
           slug: product.slug,

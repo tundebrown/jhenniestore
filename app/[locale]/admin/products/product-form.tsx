@@ -271,7 +271,7 @@ const ProductForm = ({
   name='tags'
   render={({ field }) => (
     <FormItem className='w-full'>
-      <FormLabel>Tags (e.g., `'`new-arrival`'``, `'`todays-deal`'``, `'`best-seller`'``, `'`featured`'`)</FormLabel>
+      <FormLabel>{"Tags (e.g., 'new-arrival', 'todays-deal', 'best-seller', 'featured')"}</FormLabel>
       <FormControl>
         <Input
           placeholder="Enter a tag (e.g., 'new-arrival', 'todays-deal', 'best-seller', 'featured')"

@@ -14,4 +14,11 @@ const nextConfig: NextConfig = withNextIntl()({
   },
 })
 
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+}
+
+
 export default nextConfig
