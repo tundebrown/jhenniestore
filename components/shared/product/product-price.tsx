@@ -1,7 +1,6 @@
 'use client'
 import useSettingStore from '@/hooks/use-setting-store'
 import { cn, round2 } from '@/lib/utils'
-import { useFormatter, useTranslations } from 'next-intl'
 
 const ProductPrice = ({
   price,
@@ -20,11 +19,9 @@ const ProductPrice = ({
 }) => {
   const { getCurrency } = useSettingStore()
   const currency = getCurrency()
-  const t = useTranslations()
   const convertedPrice = round2(currency.convertRate * price)
   const convertedListPrice = round2(currency.convertRate * listPrice)
 
-  const format = useFormatter()
   const discountPercent = Math.round(
     100 - (convertedPrice / convertedListPrice) * 100
   )
@@ -32,6 +29,19 @@ const ProductPrice = ({
   const [intValue, floatValue] = stringValue.includes('.')
     ? stringValue.split('.')
     : [stringValue, '']
+
+  type NumberFormatOptions = Intl.NumberFormatOptions;
+
+  const format = {
+    number(value: number, options?: NumberFormatOptions, locale: string = 'en-US') {
+      try {
+        return new Intl.NumberFormat(locale, options).format(value);
+      } catch (e) {
+        console.error('Number formatting error:', e);
+        return value.toString();
+      }
+    },
+  };
 
   return plain ? (
     format.number(convertedPrice, {
@@ -49,10 +59,10 @@ const ProductPrice = ({
     <div className='space-y-2'>
       <div className='flex justify-center items-center gap-2'>
         <span className='bg-red-700 rounded-sm p-1 text-white text-sm font-semibold'>
-          {discountPercent}% {t('Product.Off')}
+          {discountPercent}% {"Off"}
         </span>
         <span className='text-red-700 text-xs font-bold'>
-          {t('Product.Limited time deal')}
+          {"Limited time deal"}
         </span>
       </div>
       <div
@@ -64,7 +74,7 @@ const ProductPrice = ({
           <span className='text-xs align-super'>{floatValue}</span>
         </div>
         <div className='text-muted-foreground text-xs py-2'>
-          {t('Product.Was')}:{' '}
+          {"Was"}:{' '}
           <span className='line-through'>
             {format.number(convertedListPrice, {
               style: 'currency',
@@ -86,7 +96,7 @@ const ProductPrice = ({
         </div>
       </div>
       <div className='text-muted-foreground text-xs py-2'>
-        {t('Product.List price')}:{' '}
+        {"List price"}:{' '}
         <span className='line-through'>
           {format.number(convertedListPrice, {
             style: 'currency',

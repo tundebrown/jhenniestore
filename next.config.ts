@@ -1,7 +1,7 @@
-import type { NextConfig } from 'next'
-import withNextIntl from 'next-intl/plugin'
+// next.config.ts
+import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = withNextIntl()({
+const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
@@ -12,13 +12,13 @@ const nextConfig: NextConfig = withNextIntl()({
       },
     ],
   },
-})
-
-module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-}
+    i18n: {
+    locales: ['en-US', 'fr', 'de'],
+    defaultLocale: 'en-US',
+  },
+};
 
-
-export default nextConfig
+export default nextConfig;
