@@ -41,7 +41,7 @@ export default async function Header() {
           </div>
 
           {/* Menu */}
-          <Menu />
+          <Menu menuList={data.headerMenus} />
         </div>
 
         {/* Mobile Search */}
@@ -52,7 +52,7 @@ export default async function Header() {
         {/* Navigation */}
         <div className='flex items-center bg-gray-50 dark:bg-gray-800 px-4 py-3 rounded-lg mb-2'>
           <Sidebar categories={categories} />
-          <div className='flex items-center flex-wrap gap-2 ml-4'>
+          <div className='hidden md:flex items-center flex-wrap gap-2 ml-4'>
             {data.headerMenus.map((menu) => (
               <Link
                 href={menu.href}

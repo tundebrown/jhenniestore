@@ -37,7 +37,7 @@ export default async function HomePage() {
       },
       items: categories.map((category) => ({
         name: category,
-        image: `/images/${toSlug(category)}.jpg`,
+        image: `/images/${(category)}.jpg`,
         href: `/search?category=${category}`,
       })),
     },
@@ -86,7 +86,7 @@ export default async function HomePage() {
           <Card className="w-full rounded-2xl overflow-hidden border-0 shadow-lg bg-gradient-to-r from-blue-50 to-violet-50 dark:from-neutral-950/30 dark:to-slate-950/30">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <h2 className="text-sm md:text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                   <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
                     Today's Deals
                   </span>
@@ -94,7 +94,7 @@ export default async function HomePage() {
                     Limited Time
                   </span>
                 </h2>
-                <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400">
+                <div className="flex items-center gap-2 text-xs md:text-sm text-orange-600 dark:text-orange-400">
                   <span className="h-2 w-2 bg-orange-500 rounded-full animate-pulse"></span>
                   Ending soon
                 </div>
@@ -113,7 +113,7 @@ export default async function HomePage() {
           <Card className="w-full rounded-2xl overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-900">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="text-sm md:text-2xl font-bold text-gray-900 dark:text-white">
                   Best Selling Products
                 </h2>
                 <div className="flex items-center gap-2">

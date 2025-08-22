@@ -68,7 +68,7 @@ export default async function Sidebar({
           <div className='flex-1 overflow-y-auto'>
             <div className='p-4 border-b'>
               <h2 className='text-lg font-semibold'>
-                {"Shop By Department"}
+                {"Shop By Category"}
               </h2>
             </div>
             <nav className='flex flex-col'>
