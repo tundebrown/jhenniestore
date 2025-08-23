@@ -99,9 +99,9 @@ export default async function HomePage() {
                   Ending soon
                 </div>
               </div>
-              <ProductSlider 
-                title={"Today's Deals"} 
-                products={todaysDeals} 
+              <ProductSlider
+                title={"Today's Deals"}
+                products={todaysDeals}
                 variant="promotional"
               />
             </CardContent>
@@ -169,25 +169,51 @@ export default async function HomePage() {
 
         {/* Newsletter Section */}
         <section className="animate-slide-up" style={{ animationDelay: '400ms' }}>
-          <Card className="w-full rounded-2xl overflow-hidden border-0 shadow-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30">
-            <CardContent className="p-8 text-center">
+          <Card className="w-full rounded-2xl overflow-hidden border-0 shadow-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 mx-4">
+            <CardContent className="p-6 md:p-8 text-center">
               <div className="max-w-md mx-auto">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                {/* Icon for visual appeal */}
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-full">
+                    <svg
+                      className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
                   Stay Updated
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                <p className="text-gray-600 dark:text-gray-300 mb-5 text-sm md:text-base">
                   Get exclusive offers and product updates delivered to your inbox
                 </p>
-                <div className="flex gap-2">
-                  <input 
-                    type="email" 
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
                     placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+                    aria-label="Email address for newsletter subscription"
                   />
-                  <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  <button className="bg-blue-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors whitespace-nowrap text-base">
                     Subscribe
                   </button>
                 </div>
+
+                {/* Privacy assurance text */}
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
+                  We respect your privacy. Unsubscribe at any time.
+                </p>
               </div>
             </CardContent>
           </Card>
